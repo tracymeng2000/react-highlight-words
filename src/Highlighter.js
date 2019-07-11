@@ -30,7 +30,8 @@ Highlighter.propTypes = {
   ).isRequired,
   textToHighlight: PropTypes.string.isRequired,
   unhighlightClassName: PropTypes.string,
-  unhighlightStyle: PropTypes.object
+  unhighlightStyle: PropTypes.object,
+  handleClick: PropTypes.func,
 }
 
 /**
@@ -53,6 +54,7 @@ export default function Highlighter ({
   textToHighlight,
   unhighlightClassName = '',
   unhighlightStyle,
+  handleClick = null,
   ...rest
 }) {
   const chunks = findAll({
@@ -109,7 +111,8 @@ export default function Highlighter ({
           children: text,
           className: highlightClassNames,
           key: index,
-          style: highlightStyles
+          style: highlightStyles,
+          onClick: handleClick
         }
 
         // Don't attach arbitrary props to DOM elements; this triggers React DEV warnings (https://fb.me/react-unknown-prop)
@@ -124,7 +127,7 @@ export default function Highlighter ({
           children: text,
           className: unhighlightClassName,
           key: index,
-          style: unhighlightStyle
+          style: unhighlightStyle,
         })
       }
     })
